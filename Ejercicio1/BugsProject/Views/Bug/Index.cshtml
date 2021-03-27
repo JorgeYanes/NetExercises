@@ -1,0 +1,52 @@
+﻿@model PagedList.IPagedList<BugsProject.Models.ViewModels.BugDisplayVM>
+@using PagedList;
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Listado de Bug";
+}
+
+<h2>@ViewBag.Title</h2>
+<div class=" row" style="text-align:right; margin-bottom: 5px">
+    <a href="~/Bug/Create" class="btn btn-primary"> Add bug</a>
+</div>
+<div class="row" style="margin: 0px; padding-bottom: 10px">
+    @using (Html.BeginForm("Index", "Bug", FormMethod.Get))
+    {
+        <div class="col-md-4">
+            @Html.DropDownList("userId", (IEnumerable<SelectListItem>)ViewBag.ListUser, "--Select user--", new { @id = "id", @name = "name", @class = "form-control" })
+        </div>
+        <div class="col-md-4 m">
+            @Html.DropDownList("projectId", (IEnumerable<SelectListItem>)ViewBag.ListProject, "--Select project--", new { @id = "id", @name = "name", @class = "form-control" })
+        </div>
+        <div class="col-md-4">
+            <input class="btn btn-info " type="submit" value="Search" />
+        </div>
+    }
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <tr>
+                <th>#</th>
+                <th>Project Name</th>
+                <th>User Name</th>
+                <th>Description</th>
+            </tr>
+            @foreach (var bug in Model)
+            {
+                <tr>
+                    <th>@bug.Id</th>
+                    <th>@bug.Project</th>
+                    <th>@bug.User</th>
+                    <th>@bug.Description</th>
+                </tr>
+            }
+        </table>
+        <br />
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("Index",
+            new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+    </div>
+</div>

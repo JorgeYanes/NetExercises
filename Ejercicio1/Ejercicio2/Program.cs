@@ -14,9 +14,9 @@ namespace Ejercicio2
 
             /*-----bug----
              nunca se cuanta con el elemento en la posición cero ya que el ciclo comienza a recorrer el array en i=1
-            si el menor esta en dicha posición en metodo no devuelve el valor correcto
-            Como solucion se puede comenzar a iterar en i=0 o inicializar a la variable small con el valor numbers[0],
-            asumiento es valor por defecto como el menor.
+            si el menor está en dicha posición en método no devuelve el valor correcto.
+            Como solución se puede comenzar a iterar en i=0 o inicializar a la variable small con el valor numbers[0],
+            asumiento ese valor por defecto como el menor.
             Solucion 1:
             Linea 24: int small = numbers[0];
 

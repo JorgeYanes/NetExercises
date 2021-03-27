@@ -1,0 +1,32 @@
+﻿@model BugsProject.Models.ViewModels.BugCreateVM
+@{
+    ViewBag.Title = "New Bug";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Create", "Bug", FormMethod.Post)) {
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                <b>Project </b>
+                @Html.DropDownListFor(b => b.ProjectId, (IEnumerable<SelectListItem>)ViewBag.ListProject, "--Select project--", new { @id = "id", @name = "name", @class = "form-control" })
+                @Html.ValidationMessageFor(b => b.ProjectId, null, new { @class = "red" })
+            </div>
+            <div>
+                <b>User </b>
+                @Html.DropDownListFor(b => b.UserId, (IEnumerable<SelectListItem>)ViewBag.ListUser, "--Select user--", new { @id = "id", @name = "name", @class = "form-control" })
+                @Html.ValidationMessageFor(b => b.UserId, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(b => b.Description)
+                @Html.TextArea("Description", new { @class = "form-control" })
+                @Html.ValidationMessageFor(b => b.Description, null, new { @class = "red" })
+            </div>
+            <div  style="text-align:right; margin-top: 5px">
+                <input class="btn btn-primary" type="submit" value="Save" />
+            </div>
+        </div>
+    </div>
+}
+
